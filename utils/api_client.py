@@ -1,5 +1,6 @@
 import requests
 
+
 class APIClient:
     @staticmethod
     def get(url):
