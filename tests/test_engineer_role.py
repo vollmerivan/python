@@ -1,4 +1,3 @@
-import requests
 import pytest
 import allure
 from ls.config.settings import RESOURSE_URL
@@ -8,7 +7,7 @@ from ls.config.endpoints import (
     TASKS_ENDPOINT, RISKS_STATUS_EN_ENDPOINT, RISKS_STATUS_RU_ENDPOINT, EVENTS_STATUS_RU_ENDPOINT, EVENTS_STATUS_EN_ENDPOINT,
     SEASONS_MINE_ENDPOINT, ROLES_POST_ENDPOINT, ROLES_ENDPOINT, EVENTS_ENDPOINT,
     RISKS_ID_EVENT_ENDPOINT, RISKS_ID_ENDPOINT)
-from ls.models.assertions import Assertions
+from ls.utils.assertions import Assertions
 from ls.test_data.events_data import EVENT_DATA_GET, EVENT_DATA_SET, EVENT_DATA
 from ls.utils.api_client import Myrequests
 

@@ -1,4 +1,3 @@
-import requests
 import pytest
 import random
 import allure
@@ -8,7 +7,7 @@ from ls.config.settings import ADMIN_URL
 from ls.test_data.users_data import superuser, password_data, role_admin_data, role_rm_data
 from ls.config.endpoints import Admin_ORG_ENDPOINT, Admin_USER_ENDPOINT, CATEGORIES_ENDPOINT, PLACES_ENDPOINT, \
     RISKS_ENDPOINT
-from ls.models.assertions import Assertions
+from ls.utils.assertions import Assertions
 from ls.test_data.org_data import org_data
 from ls.test_data.other_data import category_data, place_data
 from ls.utils.api_client import Myrequests

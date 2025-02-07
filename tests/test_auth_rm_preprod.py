@@ -1,7 +1,7 @@
 import pytest
 import allure
 import ls.test_data.users_data
-from ls.models.assertions import Assertions
+from ls.utils.assertions import Assertions
 
 
 @pytest.mark.parametrize("user_data, expected_status, description", [

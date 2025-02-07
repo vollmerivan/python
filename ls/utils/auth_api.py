@@ -2,7 +2,7 @@ import requests
 import allure
 import json
 from ls.config.endpoints import AUTH_ENDPOINT, Admin_AUTH_ENDPOINT
-from ls.models.assertions import Assertions
+from ls.utils.assertions import Assertions
 
 
 class AuthAPI:
@@ -13,7 +13,8 @@ class AuthAPI:
             response = requests.post(AUTH_ENDPOINT, json=payload)
             response_dict = response.json()
             token = response.json().get('token')
-            Assertions.assert_json_has_key(response, 'token')
+            Assertions.assert_code_status(response, 200)
+            Assertions.assert_json_token(response, 'token')
             allure.attach(
                 json.dumps(payload, ensure_ascii=False, indent=2),
                 name="Запрос (Payload)",
@@ -38,7 +39,8 @@ class AuthAPIadmin:
 
             response_dict = response1.json()
             token = response1.json().get('token')
-            Assertions.assert_json_has_key(response1, 'token')
+            Assertions.assert_code_status(response1, 200)
+            Assertions.assert_json_token(response1, 'token')
             allure.attach(
                 json.dumps(payload, ensure_ascii=False, indent=2),
                 name="Запрос (Payload)",

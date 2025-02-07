@@ -1,4 +1,3 @@
-import requests
 import allure
 from ls.test_data.users_data import data_hunter_preprod, data_admin_preprod, data_rm_preprod
 from ls.config.endpoints import (
@@ -6,7 +5,7 @@ from ls.config.endpoints import (
     BADGES_ENDPOINT, TASKS_ENDPOINT, SEASONS_ENDPOINT, RISKS_MINE_ENDPOINT, USERS_MANAGED_ENDPOINT, PRIORITIES_ENDPOINT,
     ORG_ENDPOINT, STATISTICS_MINE_ENDPOINT, RATING_ENDPOINT, RISKS_STATUS_EN_ENDPOINT, RISKS_STATUS_RU_ENDPOINT,
     CATEGORIES_MINE_ENDPOINT)
-from ls.models.assertions import Assertions
+from ls.utils.assertions import Assertions
 from ls.utils.api_client import Myrequests
 
 
