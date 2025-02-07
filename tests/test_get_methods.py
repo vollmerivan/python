@@ -1,12 +1,12 @@
 import requests
 import allure
-from test_data.users_data import data_hunter_preprod, data_admin_preprod, data_rm_preprod
-from config.endpoints import (
+from ls.test_data.users_data import data_hunter_preprod, data_admin_preprod, data_rm_preprod
+from ls.config.endpoints import (
     RISKS_ENDPOINT, USERS_ME_ENDPOINT, USER_ENDPOINT, PLACES_ENDPOINT, CATEGORIES_ENDPOINT,
     BADGES_ENDPOINT, TASKS_ENDPOINT, SEASONS_ENDPOINT, RISKS_MINE_ENDPOINT, USERS_MANAGED_ENDPOINT, PRIORITIES_ENDPOINT,
     ORG_ENDPOINT, STATISTICS_MINE_ENDPOINT, RATING_ENDPOINT, RISKS_STATUS_EN_ENDPOINT, RISKS_STATUS_RU_ENDPOINT,
     CATEGORIES_MINE_ENDPOINT)
-from models.assertions import Assertions
+from ls.models.assertions import Assertions
 
 
 @allure.title("Проверка методов GET")

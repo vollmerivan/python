@@ -1,5 +1,5 @@
 import pytest
-from api.auth_api import AuthAPIadmin, AuthAPI
+from ls.api.auth_api import AuthAPIadmin, AuthAPI
 
 
 @pytest.fixture(scope="session")

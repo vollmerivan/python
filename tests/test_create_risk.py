@@ -1,9 +1,9 @@
 import requests
 import allure
-from test_data.users_data import data_hunter_preprod
-from test_data.risks_data import RISK_DATA
-from config.endpoints import RISKS_ENDPOINT
-from models.assertions import Assertions
+from ls.test_data.users_data import data_hunter_preprod
+from ls.test_data.risks_data import RISK_DATA
+from ls.config.endpoints import RISKS_ENDPOINT
+from ls.models.assertions import Assertions
 
 
 @allure.title("Создание риска")

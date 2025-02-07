@@ -1,15 +1,15 @@
 import requests
 import pytest
 import allure
-from config.settings import RESOURSE_URL
-from test_data.users_data import data_engineer_preprod, data_admin_preprod, data_rm_preprod
-from config.endpoints import (
+from ls.config.settings import RESOURSE_URL
+from ls.test_data.users_data import data_engineer_preprod, data_admin_preprod, data_rm_preprod
+from ls.config.endpoints import (
     RISKS_ENDPOINT, USERS_ME_ENDPOINT, USER_ENDPOINT, PLACES_MINE_ENDPOINT, CATEGORIES_ENDPOINT,
     TASKS_ENDPOINT, RISKS_STATUS_EN_ENDPOINT, RISKS_STATUS_RU_ENDPOINT, EVENTS_STATUS_RU_ENDPOINT, EVENTS_STATUS_EN_ENDPOINT,
     SEASONS_MINE_ENDPOINT, ROLES_POST_ENDPOINT, ROLES_ENDPOINT, EVENTS_ENDPOINT,
     RISKS_ID_EVENT_ENDPOINT, RISKS_ID_ENDPOINT)
-from models.assertions import Assertions
-from test_data.events_data import EVENT_DATA_GET, EVENT_DATA_SET, EVENT_DATA
+from ls.models.assertions import Assertions
+from ls.test_data.events_data import EVENT_DATA_GET, EVENT_DATA_SET, EVENT_DATA
 
 
 @allure.title("Тест на создание роли инженера")

@@ -4,13 +4,13 @@ import random
 import allure
 import uuid
 from datetime import datetime
-from config.settings import ADMIN_URL
-from test_data.users_data import superuser, password_data, role_admin_data, role_rm_data
-from config.endpoints import Admin_ORG_ENDPOINT, Admin_USER_ENDPOINT, CATEGORIES_ENDPOINT, PLACES_ENDPOINT, \
+from ls.config.settings import ADMIN_URL
+from ls.test_data.users_data import superuser, password_data, role_admin_data, role_rm_data
+from ls.config.endpoints import Admin_ORG_ENDPOINT, Admin_USER_ENDPOINT, CATEGORIES_ENDPOINT, PLACES_ENDPOINT, \
     RISKS_ENDPOINT
-from models.assertions import Assertions
-from test_data.org_data import org_data
-from test_data.other_data import category_data, place_data
+from ls.models.assertions import Assertions
+from ls.test_data.org_data import org_data
+from ls.test_data.other_data import category_data, place_data
 
 
 @allure.title("Сквозной тест")

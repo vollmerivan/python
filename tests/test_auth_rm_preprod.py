@@ -1,18 +1,17 @@
 import pytest
 import allure
-import test_data.users_data
-from models.assertions import Assertions
+import ls.test_data.users_data
+from ls.models.assertions import Assertions
 
 
 @pytest.mark.parametrize("user_data, expected_status, description", [
-    (test_data.users_data.data_rm_preprod, 200, "Позитивный сценарий с корректными данными"),
-    (test_data.users_data.invalid_pass, 401, "Негативный сценарий с некорректным паролем"),
-    (test_data.users_data.invalid_empty_login, 400, "Негативный сценарий с пустым логином"),
-    (test_data.users_data.invalid_empty_pass, 400, "Негативный сценарий с пустым паролем"),
-    (test_data.users_data.invalid_empty, 400, "Негативный сценарий с пустыми логином и паролем"),
-    (test_data.users_data.invalid_login_pass, 401, "Негативный сценарий с некорректным логином и паролем"),
-    (test_data.users_data.invalid_login, 401, "Негативный сценарий с некорректным логином")
-
+    (ls.test_data.users_data.data_rm_preprod, 200, "Позитивный сценарий с корректными данными"),
+    (ls.test_data.users_data.invalid_pass, 401, "Негативный сценарий с некорректным паролем"),
+    (ls.test_data.users_data.invalid_empty_login, 400, "Негативный сценарий с пустым логином"),
+    (ls.test_data.users_data.invalid_empty_pass, 400, "Негативный сценарий с пустым паролем"),
+    (ls.test_data.users_data.invalid_empty, 400, "Негативный сценарий с пустыми логином и паролем"),
+    (ls.test_data.users_data.invalid_login_pass, 401, "Негативный сценарий с некорректным логином и паролем"),
+    (ls.test_data.users_data.invalid_login, 401, "Негативный сценарий с некорректным логином")
 ])
 @allure.epic("Тестирование API авторизации")
 @allure.feature("Логин пользователя")

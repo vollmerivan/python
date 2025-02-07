@@ -1,8 +1,8 @@
 import requests
 import allure
 import json
-from config.endpoints import AUTH_ENDPOINT, Admin_AUTH_ENDPOINT
-from models.assertions import Assertions
+from ls.config.endpoints import AUTH_ENDPOINT, Admin_AUTH_ENDPOINT
+from ls.models.assertions import Assertions
 
 
 class AuthAPI:
