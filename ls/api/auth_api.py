@@ -6,6 +6,7 @@ from ls.models.assertions import Assertions
 
 
 class AuthAPI:
+
     @allure.step("Выполнение запроса на логин с данными: {payload}")
     def auth_headers(self, payload):
         with allure.step("Отправка POST запроса на авторизацию"):

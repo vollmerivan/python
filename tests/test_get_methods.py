@@ -7,6 +7,7 @@ from ls.config.endpoints import (
     ORG_ENDPOINT, STATISTICS_MINE_ENDPOINT, RATING_ENDPOINT, RISKS_STATUS_EN_ENDPOINT, RISKS_STATUS_RU_ENDPOINT,
     CATEGORIES_MINE_ENDPOINT)
 from ls.models.assertions import Assertions
+from ls.utils.api_client import Myrequests
 
 
 @allure.title("Проверка методов GET")
@@ -29,7 +30,7 @@ def test_get_hunter(auth_api):
 
     for endpoint in endpoints_list:
         with allure.step(f"Отправка запроса {endpoint}"):
-            response2 = requests.get(endpoint, headers=response1)
+            response2 = Myrequests.get(endpoint, headers=response1)
             Assertions.assert_code_status(response2, 200)
             print(f"Запрос {endpoint} успешен")
 
@@ -48,7 +49,7 @@ def test_get_admin(auth_api):
 
     for endpoint in endpoints_list:
         with allure.step(f"Отправка запроса {endpoint}"):
-            response2 = requests.get(endpoint, headers=response1)
+            response2 = Myrequests.get(endpoint, headers=response1)
             Assertions.assert_code_status(response2, 200)
             print(f"Запрос {endpoint} успешен")
 
@@ -70,6 +71,6 @@ def test_get_rm(auth_api):
 
     for endpoint in endpoints_list:
         with allure.step(f"Отправка запроса {endpoint}"):
-            response2 = requests.get(endpoint, headers=response1)
+            response2 = Myrequests.get(endpoint, headers=response1)
             Assertions.assert_code_status(response2, 200)
             print(f"Запрос {endpoint} успешен")

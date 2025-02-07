@@ -17,13 +17,24 @@ invalid_empty = {"email": "", "password": ""}
 invalid_empty_pass = {"email": "rmtest2@krit.pro", "password": ""}
 invalid_empty_login = {"email": "", "password": "super"}
 
-
 # Пользователи DEV
 data_rm = {"email": "123@krit.pro", "password": "123"}
 data_admin = {"email": "admin@krit.pro", "password": "admin"}
-data_hunter = {"email": "ivan.folmer@krit.pro","password": "123"}
-
+data_hunter = {"email": "ivan.folmer@krit.pro", "password": "123"}
 
 password_data = {"password": "super"}
 role_admin_data = {"id": 4}
 role_rm_data = {"id": 3}
+
+create_user_admin = {
+    "name": f"User{random.randint(1, 999)}",
+    "email": f"user{datetime.now().strftime('%m%d%y%H%M')}@krit.pro",
+    "isActive": True
+}
+
+create_user_super = {
+    "name": f"User{random.randint(1, 999)}",
+    "email": f"user{datetime.now().strftime('%m%d%y%H%M')}@krit.pro",
+    "isActive": True,
+    "organization": {"id": 1}
+}
