@@ -1,15 +1,15 @@
 import datetime
 import os
-
 from requests import Response
 
 
-class logger():
-    file_name = f"logs/log_" + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + ".log"
+class Logger():
+    file_name = f"logs/log_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 
     @classmethod
     def write_log_to_file(cls, data: str):
-        with open(cls.file_name, 'a', encoding='utf=8') as logger_file:
+        os.makedirs(os.path.dirname(cls.file_name), exist_ok=True)
+        with open(cls.file_name, 'a', encoding='utf-8') as logger_file:
             logger_file.write(data)
 
     @classmethod
@@ -37,3 +37,6 @@ class logger():
         data_to_add += f"\n-----\n"
 
         cls.write_log_to_file(data_to_add)
+
+
+

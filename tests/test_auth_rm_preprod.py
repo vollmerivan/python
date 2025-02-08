@@ -1,26 +1,18 @@
 import pytest
 import allure
-from api.auth_api import AuthAPI
-import test_data.users_data
-from models.assertions import Assertions
-
-@pytest.fixture
-def auth_api():
-    return AuthAPI()
+import ls.test_data.users_data
+from ls.utils.assertions import Assertions
 
 
 @pytest.mark.parametrize("user_data, expected_status, description", [
-       (test_data.users_data.data_rm_preprod, 200, "Позитивный сценарий с корректными данными"),
-       (test_data.users_data.invalid_pass, 401, "Негативный сценарий с некорректным паролем"),
-       (test_data.users_data.invalid_empty_login, 400, "Негативный сценарий с пустым логином"),
-       (test_data.users_data.invalid_empty_pass, 400, "Негативный сценарий с пустым паролем"),
-       (test_data.users_data.invalid_empty, 400, "Негативный сценарий с пустыми логином и паролем"),
-       (test_data.users_data.invalid_login_pass, 401, "Негативный сценарий с некорректным логином и паролем"),
-       (test_data.users_data.invalid_login, 401, "Негативный сценарий с некорректным логином")
-
-   ])
-
-
+    (ls.test_data.users_data.data_rm_preprod, 200, "Позитивный сценарий с корректными данными"),
+    (ls.test_data.users_data.invalid_pass, 401, "Негативный сценарий с некорректным паролем"),
+    (ls.test_data.users_data.invalid_empty_login, 400, "Негативный сценарий с пустым логином"),
+    (ls.test_data.users_data.invalid_empty_pass, 400, "Негативный сценарий с пустым паролем"),
+    (ls.test_data.users_data.invalid_empty, 400, "Негативный сценарий с пустыми логином и паролем"),
+    (ls.test_data.users_data.invalid_login_pass, 401, "Негативный сценарий с некорректным логином и паролем"),
+    (ls.test_data.users_data.invalid_login, 401, "Негативный сценарий с некорректным логином")
+])
 @allure.epic("Тестирование API авторизации")
 @allure.feature("Логин пользователя")
 def test_user_login(auth_api, user_data, expected_status, description):
@@ -38,7 +30,6 @@ def test_user_login(auth_api, user_data, expected_status, description):
 
     with allure.step("Проверка статуса ответа"):
         Assertions.assert_code_status(response, expected_status)
-
 
         with allure.step("Анализ содержимого ответа"):
             response_data = response.json()
