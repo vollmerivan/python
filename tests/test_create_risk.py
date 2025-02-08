@@ -1,4 +1,5 @@
 import allure
+import pytest
 from ls.config.settings import RESOURSE_URL
 from ls.test_data.users_data import data_hunter_preprod
 from ls.test_data.risks_data import RISK_DATA
@@ -9,6 +10,7 @@ from ls.utils.api_client import Myrequests
 
 @allure.title("Создание и удаление риска ")
 @allure.description("Тестирование создания и удаления нового риска через API")
+@pytest.mark.smoke
 def test_create_risk(auth_api):
     with allure.step("Получение заголовков авторизации"):
         print("Получение заголовков авторизации")
@@ -44,5 +46,3 @@ def test_create_risk(auth_api):
         response5 = Myrequests.get(RISKS_ID_ENDPOINT, response1)
         Assertions.assert_code_status(response5, 404)
         Assertions.assert_json_search_word_in_value(response5, "error", "Not Found")
-
-

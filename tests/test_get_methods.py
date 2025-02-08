@@ -1,4 +1,6 @@
 import allure
+import pytest
+
 from ls.test_data.users_data import data_hunter_preprod, data_admin_preprod, data_rm_preprod
 from ls.config.endpoints import (
     RISKS_ENDPOINT, USERS_ME_ENDPOINT, USER_ENDPOINT, PLACES_ENDPOINT, CATEGORIES_ENDPOINT,
@@ -11,6 +13,7 @@ from ls.utils.api_client import Myrequests
 
 @allure.title("Проверка методов GET")
 @allure.description("Тестирование запросы GET охотника")
+@pytest.mark.smoke
 def test_get_hunter(auth_api):
     with allure.step("Получение заголовков авторизации"):
         response1 = auth_api.auth_headers(data_hunter_preprod)
@@ -36,6 +39,7 @@ def test_get_hunter(auth_api):
 
 @allure.title("Проверка методов GET")
 @allure.description("Тестирование запросы GET админ")
+@pytest.mark.smoke
 def test_get_admin(auth_api):
     with allure.step("Получение заголовков авторизации"):
         response1 = auth_api.auth_headers(data_admin_preprod)
@@ -55,6 +59,7 @@ def test_get_admin(auth_api):
 
 @allure.title("Проверка методов GET")
 @allure.description("Тестирование запросы GET риск менеджер")
+@pytest.mark.smoke
 def test_get_rm(auth_api):
     with allure.step("Получение заголовков авторизации"):
         response1 = auth_api.auth_headers(data_rm_preprod)

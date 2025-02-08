@@ -44,8 +44,8 @@ EVENTS_STATUS_EN_ENDPOINT = f"{RESOURSE_URL}api/v1/event-statuses?culture=en"
 
 
 
-Admin_AUTH_ENDPOINT = f"{ADMIN_URL}api/v1/auth/SignIn"
-Admin_ORG_ENDPOINT = f"{ADMIN_URL}/api/v1/organizations"
-Admin_USER_ENDPOINT = f"{ADMIN_URL}api/v1/users"
-Admin_USER_patch_ENDPOINT = f"{ADMIN_URL}api/v1/users/user_id"
-Admin_role_ENDPOINT = f"{ADMIN_URL}api/v1/users/user_id/roles"
+Admin_AUTH_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/auth/SignIn"
+Admin_ORG_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/organizations"
+Admin_USER_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/users"
+Admin_USER_patch_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/users/user_id"
+Admin_role_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/users/user_id/roles"
