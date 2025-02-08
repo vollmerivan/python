@@ -3,7 +3,7 @@ from .settings import RESOURSE_URL, ADMIN_URL
 risk_id = 572     #  194 препрод, 572 дев
 user_id = 178     # 70/178 айди поьзователя из препрод/dev engineer@krit.pro
 
-AUTH_ENDPOINT = f"{RESOURSE_URL}api/v1/auth/SignIn"
+AUTH_ENDPOINT: str = f"{RESOURSE_URL}api/v1/auth/SignIn"
 
 USER_ENDPOINT = f"{RESOURSE_URL}api/v1/users"
 USERS_ME_ENDPOINT = f"{RESOURSE_URL}api/v1/users/me"
