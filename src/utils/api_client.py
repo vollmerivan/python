@@ -1,6 +1,6 @@
 import allure
 import requests
-from ls.utils.logger import Logger
+from src.utils.logger import Logger
 
 
 class Myrequests:
