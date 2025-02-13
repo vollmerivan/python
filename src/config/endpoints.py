@@ -1,15 +1,15 @@
-from .settings import RESOURSE_URL, ADMIN_URL
+from .settings import RESOURSE_URL
 
-risk_id = 194     #  194 препрод, 572 дев
-user_id = 70     # 70/178 айди поьзователя из препрод/dev engineer@krit.pro
+risk_id = 572     #  194 препрод, 572 дев
+user_id = 178     # 70/178 айди поьзователя из препрод/dev engineer@krit.pro
 
-AUTH_ENDPOINT = f"{RESOURSE_URL}api/v1/auth/SignIn"
+AUTH_ENDPOINT: str = f"{RESOURSE_URL}api/v1/auth/SignIn"
 
 USER_ENDPOINT = f"{RESOURSE_URL}api/v1/users"
 USERS_ME_ENDPOINT = f"{RESOURSE_URL}api/v1/users/me"
 USERS_MANAGED_ENDPOINT = f"{RESOURSE_URL}api/v1/users/managed"
 ROLES_ENDPOINT = f"{RESOURSE_URL}api/v1/roles"
-ROLES_POST_ENDPOINT = f"{RESOURSE_URL}api/v1/users/{user_id}/roles" #70/178 айди поьзователя из препрод/dev engineer@krit.pro
+ROLES_POST_ENDPOINT = f"{RESOURSE_URL}api/v1/users/{user_id}/roles"
 
 PLACES_ENDPOINT = f"{RESOURSE_URL}api/v1/places"
 PLACES_MINE_ENDPOINT = f"{RESOURSE_URL}api/v1/places/mine"
@@ -44,8 +44,8 @@ EVENTS_STATUS_EN_ENDPOINT = f"{RESOURSE_URL}api/v1/event-statuses?culture=en"
 
 
 
-Admin_AUTH_ENDPOINT = f"{ADMIN_URL}api/v1/auth/SignIn"
-Admin_ORG_ENDPOINT = f"{ADMIN_URL}/api/v1/organizations"
-Admin_USER_ENDPOINT = f"{ADMIN_URL}api/v1/users"
-Admin_USER_patch_ENDPOINT = f"{ADMIN_URL}api/v1/users/user_id"
-Admin_role_ENDPOINT = f"{ADMIN_URL}api/v1/users/user_id/roles"
+Admin_AUTH_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/auth/SignIn"
+Admin_ORG_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/organizations"
+Admin_USER_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/users"
+Admin_USER_patch_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/users/user_id"
+Admin_role_ENDPOINT = f"{RESOURSE_URL}admin/api/v1/users/user_id/roles"

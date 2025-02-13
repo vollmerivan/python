@@ -1,29 +1,22 @@
 import pytest
 import allure
-from api.auth_api import AuthAPI
-import test_data.users_data
-from models.assertions import Assertions
-
-@pytest.fixture
-def auth_api():
-    return AuthAPI()
+import src.test_data.users_data
+from src.config.endpoints import AUTH_ENDPOINT
+from src.utils.assertions import Assertions
 
 
 @pytest.mark.parametrize("user_data, expected_status, description", [
-       (test_data.users_data.data_rm_preprod, 200, "Позитивный сценарий с корректными данными"),
-       (test_data.users_data.invalid_pass, 401, "Негативный сценарий с некорректным паролем"),
-       (test_data.users_data.invalid_empty_login, 400, "Негативный сценарий с пустым логином"),
-       (test_data.users_data.invalid_empty_pass, 400, "Негативный сценарий с пустым паролем"),
-       (test_data.users_data.invalid_empty, 400, "Негативный сценарий с пустыми логином и паролем"),
-       (test_data.users_data.invalid_login_pass, 401, "Негативный сценарий с некорректным логином и паролем"),
-       (test_data.users_data.invalid_login, 401, "Негативный сценарий с некорректным логином")
-
-   ])
-
-
+    (src.test_data.users_data.data_rm_preprod, 200, "Позитивный сценарий с корректными данными"),
+    (src.test_data.users_data.invalid_pass, 401, "Негативный сценарий с некорректным паролем"),
+    (src.test_data.users_data.invalid_empty_login, 400, "Негативный сценарий с пустым логином"),
+    (src.test_data.users_data.invalid_empty_pass, 400, "Негативный сценарий с пустым паролем"),
+    (src.test_data.users_data.invalid_empty, 400, "Негативный сценарий с пустыми логином и паролем"),
+    (src.test_data.users_data.invalid_login_pass, 401, "Негативный сценарий с некорректным логином и паролем"),
+    (src.test_data.users_data.invalid_login, 401, "Негативный сценарий с некорректным логином")
+])
 @allure.epic("Тестирование API авторизации")
 @allure.feature("Логин пользователя")
-def test_user_login(auth_api, user_data, expected_status, description):
+def test_user_login(create_headers_for_test, user_data, expected_status, description):
     """
     Тестирование авторизации пользователя с валидными и не валидными данными.
     """
@@ -34,14 +27,13 @@ def test_user_login(auth_api, user_data, expected_status, description):
     allure.dynamic.title(f"Тест авторизации: {description}")
 
     with allure.step("Отправка запроса на логин"):
-        response = auth_api.login(user_data)
+        auth_header = create_headers_for_test(url=AUTH_ENDPOINT, payload=user_data)
 
     with allure.step("Проверка статуса ответа"):
-        Assertions.assert_code_status(response, expected_status)
-
+        Assertions.assert_code_status(auth_header, expected_status)
 
         with allure.step("Анализ содержимого ответа"):
-            response_data = response.json()
+            response_data = auth_header.json()
             if expected_status == 200:
                 allure.attach(
                     "Авторизация успешна!",
