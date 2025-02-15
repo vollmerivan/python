@@ -2,13 +2,14 @@ import requests
 import allure
 import json
 from src.config.endpoints import AUTH_ENDPOINT, Admin_AUTH_ENDPOINT
+from src.utils.api_client import Myrequests
 from src.utils.assertions import Assertions
 
 
 @allure.step("Выполнение запроса на логин с данными: {payload}")
 def auth_headers(payload):
     with allure.step("Отправка POST запроса на авторизацию"):
-        response = requests.post(AUTH_ENDPOINT, json=payload)
+        response = Myrequests.post(AUTH_ENDPOINT, headers=None, json=payload)
         response_dict = response.json()
         token = response.json().get('token')
         Assertions.assert_code_status(response, 200)
@@ -31,7 +32,7 @@ def auth_headers(payload):
 @allure.step("Выполнение запроса на логин с данными: {payload}")
 def auth_headers_admin(payload):
     with allure.step("Отправка POST запроса на авторизацию"):
-        response1 = requests.post(Admin_AUTH_ENDPOINT, json=payload)
+        response1 = Myrequests.post(Admin_AUTH_ENDPOINT, headers=None, json=payload)
 
         response_dict = response1.json()
         token = response1.json().get('token')

@@ -5,25 +5,14 @@ from src.test_data.users_data import create_user_admin
 from src.utils import auth_api
 
 
-
-# @pytest.fixture(scope="session")
-# def auth_api():
-#     return AuthAPI()
-#
-#
-# @pytest.fixture(scope="session")
-# def auth_api_admin():
-#     return AuthAPIadmin()
-
-
-
 """фикстура создания пользователя"""
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def create_user(create_headers_for_test):
     def _create_user(headers: dict):
         response = requests.post(USER_ENDPOINT, headers=headers, json=create_user_admin)
+        return response
 
-    return _create_user
+    yield _create_user
 
 """Фикстура авторизации"""
 @pytest.fixture()

@@ -15,26 +15,26 @@ class Myrequests:
             return result
 
     @staticmethod
-    def patch(url, headers, data):
+    def patch(url, headers, json):
         with allure.step("PATCH"):
             Logger.add_request(url, method="PATCH")
-            result = requests.put(url, headers=headers, json=data)
+            result = requests.put(url, headers=headers, json=json)
             Logger.add_response(result)
             return result
 
     @staticmethod
-    def put(url, headers, data):
+    def put(url, headers, json):
         with allure.step("PUT"):
             Logger.add_request(url, method="PUT")
-            result = requests.put(url, headers=headers, json=data)
+            result = requests.put(url, headers=headers, json=json)
             Logger.add_response(result)
             return result
 
     @staticmethod
-    def post(url, headers, data):
+    def post(url, headers, json):
         with allure.step("POST"):
             Logger.add_request(url, method="POST")
-            result = requests.post(url, headers=headers, json=data)
+            result = requests.post(url, headers=headers, json=json)
             Logger.add_response(result)
             return result
 
