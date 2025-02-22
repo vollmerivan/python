@@ -9,7 +9,7 @@ from src.config.endpoints import Admin_ORG_ENDPOINT, Admin_USER_ENDPOINT, CATEGO
 from src.utils.assertions import Assertions
 from src.test_data.org_data import org_data
 from src.test_data.other_data import category_data, place_data
-from src.utils.api_client import Myrequests
+from src.utils.api_client_fast import Myrequests
 from tests.conftest import create_headers_for_test
 
 

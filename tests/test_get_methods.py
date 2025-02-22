@@ -7,7 +7,7 @@ from src.config.endpoints import (
     ORG_ENDPOINT, STATISTICS_MINE_ENDPOINT, RATING_ENDPOINT, RISKS_STATUS_EN_ENDPOINT, RISKS_STATUS_RU_ENDPOINT,
     CATEGORIES_MINE_ENDPOINT, AUTH_ENDPOINT)
 from src.utils.assertions import Assertions
-from src.utils.api_client import Myrequests
+from src.utils.api_client_fast import Myrequests
 
 
 @allure.title("Проверка методов GET")

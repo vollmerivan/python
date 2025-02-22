@@ -1,18 +1,7 @@
 import pytest
-import requests
-from src.config.endpoints import USER_ENDPOINT, AUTH_ENDPOINT
-from src.test_data.users_data import create_user_admin
+from src.config.endpoints import AUTH_ENDPOINT
 from src.utils import auth_api
 
-
-"""фикстура создания пользователя"""
-@pytest.fixture()
-def create_user(create_headers_for_test):
-    def _create_user(headers: dict):
-        response = requests.post(USER_ENDPOINT, headers=headers, json=create_user_admin)
-        return response
-
-    yield _create_user
 
 """Фикстура авторизации"""
 @pytest.fixture()

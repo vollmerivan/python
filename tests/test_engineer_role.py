@@ -10,7 +10,7 @@ from src.config.endpoints import (
     RISKS_ID_EVENT_ENDPOINT, RISKS_ID_ENDPOINT, AUTH_ENDPOINT)
 from src.utils.assertions import Assertions
 from src.test_data.events_data import EVENT_DATA_GET, EVENT_DATA_SET, EVENT_DATA
-from src.utils.api_client import Myrequests
+from src.utils.api_client_fast import Myrequests
 
 
 @allure.title("Тест на создание роли инженера")

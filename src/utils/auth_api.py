@@ -2,7 +2,7 @@ import requests
 import allure
 import json
 from src.config.endpoints import AUTH_ENDPOINT, Admin_AUTH_ENDPOINT
-from src.utils.api_client import Myrequests
+from src.utils.api_client_fast import Myrequests
 from src.utils.assertions import Assertions
 
 
