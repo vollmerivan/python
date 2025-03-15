@@ -9,13 +9,14 @@ USER_ENDPOINT = "api/v1/users"
 USERS_ME_ENDPOINT = "api/v1/users/me"
 USERS_MANAGED_ENDPOINT = "api/v1/users/managed"
 ROLES_ENDPOINT = "api/v1/roles"
-ROLES_POST_ENDPOINT = "api/v1/users/{user_id}/roles"
+ROLES_USER_ENDPOINT = "api/v1/users/{user_id}/roles"
 
 PLACES_ENDPOINT = "api/v1/places"
 PLACES_MINE_ENDPOINT = "api/v1/places/mine"
 
 PRIORITIES_ENDPOINT = "api/v1/priorities"
 ORG_ENDPOINT = "api/v1/organizations"
+ORG_ENDPOINT_ID = "/api/v1/organizations/{organizationId}"
 STATISTICS_MINE_ENDPOINT = "api/v1/statistics/mine"
 RATING_ENDPOINT = "api/v1/rating"
 
@@ -44,11 +45,11 @@ PROPERTIES_ENDPOINT = "api/v1/organizations/mine/properties"
 EVENTS_ENDPOINT = "api/v1/events"
 EVENTS_STATUS_RU_ENDPOINT = "api/v1/event-statuses?culture=ru"
 EVENTS_STATUS_EN_ENDPOINT = "api/v1/event-statuses?culture=en"
-
-
+EVENTS_ID_ENDPOINT = "api/v1/events/{event_id}"
+EVENTS_ID_HISTORY_ENDPOINT = "api/v1/events/{event_id}/history"
 
 Admin_AUTH_ENDPOINT = "admin/api/v1/auth/SignIn"
 Admin_ORG_ENDPOINT = "admin/api/v1/organizations"
 Admin_USER_ENDPOINT = "admin/api/v1/users"
-Admin_USER_patch_ENDPOINT = "admin/api/v1/users/user_id"
-Admin_role_ENDPOINT = "admin/api/v1/users/user_id/roles"
+Admin_USER_patch_ENDPOINT = "admin/api/v1/users/{user_id}"
+Admin_role_ENDPOINT = "admin/api/v1/users/{user_id}/roles"

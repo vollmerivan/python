@@ -1,7 +1,6 @@
 from requests import Request
 
 from src.api.api_client import api_client
-from src.test_data.risks_data import RISK_DATA
 from src.test_data.users_data import UsersData
 from src.config.endpoints import RISKS_ENDPOINT, RISKS_ID_ENDPOINT, RISKS_MINE_ENDPOINT, RISKS_ID_HISTORY, \
     RISKS_EXPORT_ENDPOINT
@@ -12,8 +11,8 @@ def get_risks(by_user: UsersData):
     response = api_client.send_request(request=request, by_user=by_user)
     return response
 
-def create_risk(by_user: UsersData):
-    request = Request(url=RISKS_ENDPOINT, method='post', json=RISK_DATA)
+def create_risk(by_user: UsersData, risk_data: dict):
+    request = Request(url=RISKS_ENDPOINT, method='post', json=risk_data)
     response = api_client.send_request(request=request, by_user=by_user)
     return response
 
@@ -30,8 +29,8 @@ def delete_risk_by_id(by_user: UsersData, risk_id: int):
     return response
 
 
-def patch_risk_by_id(by_user: UsersData, risk_id: int):
-    request = Request(url=RISKS_ID_ENDPOINT.format(risk_id=risk_id), method='patch')
+def patch_risk_by_id(by_user: UsersData, risk_id: int, risk_data: dict):
+    request = Request(url=RISKS_ID_ENDPOINT.format(risk_id=risk_id), method='patch', json=risk_data)
     response = api_client.send_request(request=request, by_user=by_user)
     return response
 

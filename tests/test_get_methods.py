@@ -1,21 +1,21 @@
 import allure
 import pytest
-from src.test_data.users_data import data_hunter_preprod, data_admin_preprod, data_rm_preprod
+
+from src.api.users_api import get_any
+from src.test_data.users_data import DATA_ADMIN_PREPROD, DATA_RM_PREPROD, DATA_HUNTER
 from src.config.endpoints import (
     RISKS_ENDPOINT, USERS_ME_ENDPOINT, USER_ENDPOINT, PLACES_ENDPOINT, CATEGORIES_ENDPOINT,
     BADGES_ENDPOINT, TASKS_ENDPOINT, SEASONS_ENDPOINT, RISKS_MINE_ENDPOINT, USERS_MANAGED_ENDPOINT, PRIORITIES_ENDPOINT,
     ORG_ENDPOINT, STATISTICS_MINE_ENDPOINT, RATING_ENDPOINT, RISKS_STATUS_EN_ENDPOINT, RISKS_STATUS_RU_ENDPOINT,
-    CATEGORIES_MINE_ENDPOINT, AUTH_ENDPOINT)
+    CATEGORIES_MINE_ENDPOINT)
 from src.utils.assertions import Assertions
-from src.utils.api_client_fast import Myrequests
+
 
 
 @allure.title("Проверка методов GET")
 @allure.description("Тестирование запросы GET охотника")
 @pytest.mark.smoke
 def test_get_hunter(create_headers_for_test):
-    with allure.step("Получение заголовков авторизации"):
-        auth_header = create_headers_for_test(url=AUTH_ENDPOINT, payload=data_hunter_preprod)
 
     endpoints_list = [USERS_ME_ENDPOINT,
                       RISKS_MINE_ENDPOINT,
@@ -31,8 +31,8 @@ def test_get_hunter(create_headers_for_test):
 
     for endpoint in endpoints_list:
         with allure.step(f"Отправка запроса {endpoint}"):
-            response2 = Myrequests.get(endpoint, headers=auth_header)
-            Assertions.assert_code_status(response2, 200)
+            response = get_any(url=endpoint, by_user=DATA_HUNTER)
+            Assertions.assert_code_status(response, 200)
             print(f"Запрос {endpoint} успешен")
 
 
@@ -40,8 +40,6 @@ def test_get_hunter(create_headers_for_test):
 @allure.description("Тестирование запросы GET админ")
 @pytest.mark.smoke
 def test_get_admin(create_headers_for_test):
-    with allure.step("Получение заголовков авторизации"):
-        auth_header = create_headers_for_test(url=AUTH_ENDPOINT, payload=data_admin_preprod)
 
     endpoints_list = [USERS_ME_ENDPOINT,
                       USER_ENDPOINT,
@@ -51,8 +49,8 @@ def test_get_admin(create_headers_for_test):
 
     for endpoint in endpoints_list:
         with allure.step(f"Отправка запроса {endpoint}"):
-            response2 = Myrequests.get(endpoint, headers=auth_header)
-            Assertions.assert_code_status(response2, 200)
+            response = get_any(url=endpoint, by_user=DATA_ADMIN_PREPROD)
+            Assertions.assert_code_status(response, 200)
             print(f"Запрос {endpoint} успешен")
 
 
@@ -60,8 +58,6 @@ def test_get_admin(create_headers_for_test):
 @allure.description("Тестирование запросы GET риск менеджер")
 @pytest.mark.smoke
 def test_get_rm(create_headers_for_test):
-    with allure.step("Получение заголовков авторизации"):
-        auth_header = create_headers_for_test(url=AUTH_ENDPOINT, payload=data_rm_preprod)
 
     endpoints_list = [USERS_ME_ENDPOINT,
                       USER_ENDPOINT,
@@ -74,6 +70,6 @@ def test_get_rm(create_headers_for_test):
 
     for endpoint in endpoints_list:
         with allure.step(f"Отправка запроса {endpoint}"):
-            response2 = Myrequests.get(endpoint, headers=auth_header)
-            Assertions.assert_code_status(response2, 200)
+            response = get_any(url=endpoint, by_user=DATA_RM_PREPROD)
+            Assertions.assert_code_status(response, 200)
             print(f"Запрос {endpoint} успешен")

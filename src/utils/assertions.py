@@ -9,7 +9,7 @@ class Assertions:
 
     @staticmethod
     def assert_code_status(response: Response, expected_status):
-        assert response.status_code == expected_status
+
         if response.status_code == expected_status:
             print("Успешно!!! Статус код = " + str(response.status_code))
         else:
@@ -18,6 +18,7 @@ class Assertions:
                 f"Тело ответа: {response.text}\n"
                 f"Тело запроса: {response.request.body}"
             )
+        assert response.status_code == expected_status
 
 
 

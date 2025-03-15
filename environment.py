@@ -16,10 +16,11 @@ class Environment:
         except KeyError:
             self.env = self.DEV
 
-    def get_base_url(self):
+    def get_base_url(self, URLS):
         if self.env in URLS:
             return self.URLS[self.env]
         else:
             raise Exception(f"Unknown value ENV variable {self.env}")
+
 
 ENV_OBJECT = Environment()

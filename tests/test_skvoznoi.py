@@ -3,26 +3,28 @@ import random
 import allure
 import uuid
 from datetime import datetime
-from src.test_data.users_data import superuser, password_data, role_admin_data, role_rm_data
-from src.config.endpoints import Admin_ORG_ENDPOINT, Admin_USER_ENDPOINT, CATEGORIES_ENDPOINT, PLACES_ENDPOINT, \
-    RISKS_ENDPOINT, Admin_AUTH_ENDPOINT, AUTH_ENDPOINT
+
+from src.api.categories_api import create_categories
+from src.api.org_admin_api import create_organization
+from src.api.places_api import create_places
+from src.api.risk_api import create_risk, get_risks
+from src.api.users_api import create_user_admin, patch_user_admin, post_roles_by_user_admin
+from src.test_data.users_data import password_data, role_admin_data, role_rm_data, SUPER_USER
+
 from src.utils.assertions import Assertions
 from src.test_data.org_data import org_data
-from src.test_data.other_data import category_data, place_data
-from src.utils.api_client_fast import Myrequests
-from tests.conftest import create_headers_for_test
+
+
 
 
 @allure.title("Сквозной тест")
 @allure.description("Тестирование создания организации, пользоватея, справочников и риска ")
 @pytest.fixture
 def test_post_org(create_headers_for_test):
-    with allure.step("Получение заголовков авторизации"):
-        auth_header = create_headers_for_test(url=Admin_AUTH_ENDPOINT, payload=superuser)
     with allure.step("Создание организации"):
-        response2 = Myrequests.post(Admin_ORG_ENDPOINT, headers=auth_header, json=org_data)
-        Assertions.assert_code_status(response2, 200)
-        org_id = response2.json().get('id')
+        create_org = create_organization(by_user=SUPER_USER, org_data=org_data)
+        Assertions.assert_code_status(create_org, 200)
+        org_id = create_org.json().get('id')
         print(f"Создана организация с name: {org_data['name']} и id: {org_id}")
 
     with allure.step("Создание пользователя в организации"):
@@ -32,26 +34,27 @@ def test_post_org(create_headers_for_test):
             "isActive": True,
             "organization": {"id": org_id}
         }
-        response3 = Myrequests.post(Admin_USER_ENDPOINT, headers=auth_header, json=user_data)
-        Assertions.assert_code_status(response3, 200)
-        user_id = response3.json().get('id')
+        create_user = create_user_admin(by_user=SUPER_USER, user_data=user_data)
+        Assertions.assert_code_status(create_user, 200)
+        user_id = create_user.json().get('id')
         print(f"Создан пользователь с email: {user_data['email']} и id: {user_id}")
         user_email = user_data['email']
 
     with allure.step("Присвоение пароля созданному пользователю"):
-        Admin_USER_patch_ENDPOINT = f"{ADMIN_URL}api/v1/users/{user_id}"
-        response4 = Myrequests.patch(Admin_USER_patch_ENDPOINT, headers=auth_header, json=password_data)
-        Assertions.assert_code_status(response4, 200)
+        set_pass_user = patch_user_admin(by_user=SUPER_USER, user_id=user_id, patch_data=password_data)
+        Assertions.assert_code_status(set_pass_user, 200)
         print(f'Пароль присвоен {password_data['password']} для пользователя {user_id}')
-    with allure.step("Присвоение пароля созданному пользователю"):
-        Admin_role_ENDPOINT = f"{ADMIN_URL}api/v1/users/{user_id}/roles"
+
+
     with allure.step("Присвоение роли администратор пользователю"):
-        response5 = Myrequests.post(Admin_role_ENDPOINT, headers=auth_header, json=role_admin_data)
-        Assertions.assert_code_status(response5, 200)
+        set_role_admin_user = post_roles_by_user_admin(by_user=SUPER_USER, user_id=user_id, role_id=role_admin_data)
+        Assertions.assert_code_status(set_role_admin_user, 200)
         print(f'Присвоена роль администратора для пользователя {user_id}')
+
+
     with allure.step("Присвоение роли риск-менеджер пользователю"):
-        response6 = Myrequests.post(Admin_role_ENDPOINT, headers=auth_header, json=role_rm_data)
-        Assertions.assert_code_status(response6, 200)
+        set_role_rm_user = post_roles_by_user_admin(by_user=SUPER_USER, user_id=user_id, role_id=role_rm_data)
+        Assertions.assert_code_status(set_role_rm_user, 200)
         print(f'Присвоена роль риск-менеджер для пользователя {user_id}')
 
         return user_email, user_id, org_id
@@ -60,22 +63,21 @@ def test_post_org(create_headers_for_test):
 @pytest.fixture
 def test_post_directory(create_headers_for_test, test_post_org):
     user_email, user_id, org_id = test_post_org
-    with allure.step("Получение заголовков авторизации созданного пользователя"):
-        data_user = {"email": user_email, "password": "super"}
-        auth_header = create_headers_for_test(url=AUTH_ENDPOINT, payload=data_user)
+    data_user: dict = {"email": user_email, "password": "super"}
+
 
     with (allure.step("Создание новой категории")):
-        response2 = Myrequests.post(CATEGORIES_ENDPOINT, headers=auth_header, json=category_data)
-        Assertions.assert_code_status(response2, 200)
-        Assertions.assert_json_has_key(response2, "id")
-        cat_id = response2.json().get("id")
+        create_new_category = create_categories(by_user=data_user)
+        Assertions.assert_code_status(create_new_category, 200)
+        Assertions.assert_json_has_key(create_new_category, "id")
+        cat_id = create_new_category.json().get("id")
         print(f"Создана категория {cat_id}")
 
     with (allure.step("Создание новой территории")):
-        response3 = Myrequests.post(PLACES_ENDPOINT, headers=auth_header, json=place_data)
-        Assertions.assert_code_status(response3, 200)
-        Assertions.assert_json_has_key(response3, "id")
-        place_id = response3.json().get("id")
+        create_new_place = create_places(by_user=data_user)
+        Assertions.assert_code_status(create_new_place, 200)
+        Assertions.assert_json_has_key(create_new_place, "id")
+        place_id = create_new_place.json().get("id")
         print(f"Создана территория {place_id}")
 
         return user_email, cat_id, place_id, user_id
@@ -85,25 +87,24 @@ def test_post_directory(create_headers_for_test, test_post_org):
 @allure.description("Тестирование создания нового риска через API")
 def test_create_risk(create_headers_for_test, test_post_directory):
     user_email, cat_id, place_id, user_id = test_post_directory
-    with allure.step("Получение заголовков авторизации"):
-        data_user = {'email': user_email, 'password': 'super'}
-        auth_header = create_headers_for_test(url=AUTH_ENDPOINT, payload=data_user)
+
+    data_user = {'email': user_email, 'password': 'super'}
 
     with (allure.step("Создание нового риска")):
-        RISK_DATA = {
+        risk_data_now = {
             "uniqueId": str(uuid.uuid4()),
-            "description": f"Создание риска через автотест 'skvoznoi'",
+            "description": "Создание риска через автотест 'skvoznoi'",
             "category": {'id': cat_id},
             "place": {"id": place_id},
             "priority": {"id": -1},
             "user": {"id": user_id},
             "status": {"id": 1}
         }
-        response2 = Myrequests.post(RISKS_ENDPOINT, headers=auth_header, json=RISK_DATA)
+        response2 = create_risk(by_user=data_user, risk_data=risk_data_now)
         Assertions.assert_code_status(response2, 200)
         Assertions.assert_json_has_key(response2, "id")
         print(f"Создан риск {response2.json().get("id")}")
 
     with (allure.step("Получение списка рисков")):
-        response3 = Myrequests.get(RISKS_ENDPOINT, headers=auth_header)
-        Assertions.assert_code_status(response3, 200)
+        get_risk = get_risks(by_user=data_user)
+        Assertions.assert_code_status(get_risk, 200)

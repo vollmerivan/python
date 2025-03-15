@@ -26,11 +26,12 @@ INVALID_EMPTY_LOGIN = UsersData(email="", password="super")
 # Пользователи DEV
 DATA_RM = UsersData(email="123@krit.pro", password="123")
 DATA_ADMIN = UsersData(email="admin@krit.pro", password="admin")
-DATA_HUNTER = UsersData(email="ivan.folmer@krit.pro", password="123")
+
 
 password_data = {"password": "super"}
 role_admin_data = {"id": 4}
 role_rm_data = {"id": 3}
+role_engineer = {'id': 8}
 
 USER_DATA = {
     "name": f"User{random.randint(1, 999)}",
