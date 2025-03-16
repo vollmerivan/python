@@ -7,6 +7,10 @@ from src.test_data.users_data import DATA_RM_PREPROD, INVALID_PASS, INVALID_EMPT
 from src.utils.assertions import Assertions
 
 
+def requests(by_user):
+    pass
+
+
 @pytest.mark.parametrize("user_data, expected_status, description", [
     (DATA_RM_PREPROD, 200, "Позитивный сценарий с корректными данными"),
     (INVALID_PASS, 401, "Негативный сценарий с некорректным паролем"),
@@ -27,7 +31,7 @@ def test_user_login(user_data, expected_status, description):
     allure.dynamic.title(f"Тест авторизации: {description}")
 
     with allure.step("Отправка запроса на логин"):
-        auth_header = auth(by_user=user_data)
+        auth_header = requests(by_user=user_data)
 
     with allure.step("Проверка статуса ответа"):
         Assertions.assert_code_status(auth_header, expected_status)

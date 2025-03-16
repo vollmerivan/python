@@ -8,4 +8,4 @@ class ApiLogConfig:
     FILE: bool = os.getenv(key='LOG_FILE', default=None)
 
 
-api_log_config = ApiLogConfig
+api_log_config = ApiLogConfig()

@@ -36,7 +36,7 @@ class Client:
         }
         login_url = Admin_AUTH_ENDPOINT if by_user == SUPER_USER else AUTH_ENDPOINT
         token = session.post(host + login_url, headers=None, json=payload).json().get('token')
-        session.headers['Authorization'] = f'Braer {token}'
+        session.headers['Authorization'] = f'Bearer {token}'
 
         return session
 
